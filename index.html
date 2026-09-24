@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Surface Contamination Screening</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>AI Surface Contamination Screening</h1>
+
+        <p class="subtitle">
+            Capture a medical equipment surface using the camera
+        </p>
+
+        <div class="camera-box">
+            <video id="camera" autoplay playsinline></video>
+        </div>
+
+        <div class="buttons">
+            <button id="startCamera">Start Back Camera</button>
+            <button id="captureImage">Capture Image</button>
+        </div>
+
+        <canvas id="canvas"></canvas>
+
+        <div class="result-box">
+            <h2>Screening Result</h2>
+            <p id="status">Camera not started</p>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

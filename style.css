@@ -1,0 +1,89 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f6f8;
+    color: #222;
+}
+
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 25px;
+    text-align: center;
+    background: white;
+    border-radius: 15px;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.camera-box {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    background: #111;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#camera {
+    width: 100%;
+    display: block;
+}
+
+.buttons {
+    margin: 20px 0;
+}
+
+button {
+    padding: 12px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#startCamera {
+    background: #1976d2;
+    color: white;
+}
+
+#captureImage {
+    background: #2e7d32;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+#canvas {
+    display: none;
+}
+
+.result-box {
+    margin-top: 20px;
+    padding: 15px;
+    background: #eef3f5;
+    border-radius: 10px;
+}
+
+.result-box h2 {
+    margin-top: 0;
+}
+
+#status {
+    font-size: 18px;
+    font-weight: bold;
+}
