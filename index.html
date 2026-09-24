@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>AI Surface Contamination Screening</title>
 
     <link rel="stylesheet" href="style.css">
@@ -23,20 +25,40 @@
         </div>
 
         <div class="buttons">
-            <button id="startCamera">Start Back Camera</button>
-            <button id="captureImage">Capture Image</button>
+
+            <button id="startCamera">
+                Start Back Camera
+            </button>
+
+            <button id="captureImage">
+                Capture Image
+            </button>
+
         </div>
 
         <canvas id="canvas"></canvas>
 
         <div class="result-box">
+
             <h2>Screening Result</h2>
-            <p id="status">Camera not started</p>
+
+            <p id="status">
+                Loading AI model...
+            </p>
+
         </div>
 
     </div>
 
+    <!-- TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+
+    <!-- Teachable Machine -->
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+
+    <!-- Our JavaScript -->
     <script src="script.js"></script>
 
 </body>
+
 </html>
