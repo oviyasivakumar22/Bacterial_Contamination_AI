@@ -1,63 +1,198 @@
-const video = document.getElementById("camera");
-const canvas = document.getElementById("canvas");
-const startButton = document.getElementById("startCamera");
-const captureButton = document.getElementById("captureImage");
-const statusText = document.getElementById("status");
+const MODEL_URL =
+    "https://teachablemachine.withgoogle.com/models/EjltShDBC/";
 
+let model;
 let cameraStream = null;
 
-// Start the back camera
-startButton.addEventListener("click", async () => {
+const video = document.getElementById("camera");
+const canvas = document.getElementById("canvas");
+
+const startButton =
+    document.getElementById("startCamera");
+
+const captureButton =
+    document.getElementById("captureImage");
+
+const statusText =
+    document.getElementById("status");
+
+
+// Load the Teachable Machine model
+async function loadModel() {
+
     try {
-        cameraStream = await navigator.mediaDevices.getUserMedia({
-            video: {
-                facingMode: { ideal: "environment" }
-            },
-            audio: false
-        });
 
-        video.srcObject = cameraStream;
+        statusText.textContent =
+            "Loading AI model...";
 
-        statusText.textContent = "Back camera is active. Point it at the equipment.";
+        const modelURL =
+            MODEL_URL + "model.json";
+
+        const metadataURL =
+            MODEL_URL + "metadata.json";
+
+        model = await tmImage.load(
+            modelURL,
+            metadataURL
+        );
+
+        statusText.textContent =
+            "AI model ready. Start the camera.";
+
+        console.log(
+            "AI model loaded successfully."
+        );
 
     } catch (error) {
+
         console.error(error);
+
         statusText.textContent =
-            "Camera access failed. Please allow camera permission.";
+            "Failed to load AI model.";
     }
-});
+}
 
-// Capture an image
-captureButton.addEventListener("click", () => {
-    if (!cameraStream) {
-        statusText.textContent = "Start the camera first.";
-        return;
+
+// Start the rear camera
+startButton.addEventListener(
+    "click",
+    async () => {
+
+        try {
+
+            cameraStream =
+                await navigator.mediaDevices
+                    .getUserMedia({
+
+                        video: {
+                            facingMode: {
+                                ideal: "environment"
+                            }
+                        },
+
+                        audio: false
+                    });
+
+            video.srcObject =
+                cameraStream;
+
+            statusText.textContent =
+                "Back camera active. Point it at the equipment.";
+
+        } catch (error) {
+
+            console.error(error);
+
+            statusText.textContent =
+                "Camera access failed. Please allow camera permission.";
+        }
     }
+);
 
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
 
-    const context = canvas.getContext("2d");
+// Capture image and analyze it
+captureButton.addEventListener(
+    "click",
+    async () => {
 
-    context.drawImage(
-        video,
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
+        if (!cameraStream) {
 
-    const capturedImage = canvas.toDataURL("image/png");
+            statusText.textContent =
+                "Start the camera first.";
 
-    // Show captured image in the camera area
-    const image = document.createElement("img");
-    image.src = capturedImage;
-    image.style.width = "100%";
-    image.style.marginTop = "15px";
-    image.style.borderRadius = "10px";
+            return;
+        }
 
-    document.querySelector(".camera-box").appendChild(image);
+        if (!model) {
 
-    statusText.textContent =
-        "Image captured successfully. AI analysis will be connected next.";
-});
+            statusText.textContent =
+                "AI model is still loading.";
+
+            return;
+        }
+
+
+        // Capture current camera frame
+        canvas.width =
+            video.videoWidth;
+
+        canvas.height =
+            video.videoHeight;
+
+        const context =
+            canvas.getContext("2d");
+
+        context.drawImage(
+            video,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+
+        // Ask the AI model for prediction
+        const predictions =
+            await model.predict(canvas);
+
+
+        // Find the class with highest confidence
+        let highestPrediction =
+            predictions[0];
+
+        for (
+            let i = 1;
+            i < predictions.length;
+            i++
+        ) {
+
+            if (
+                predictions[i].probability >
+                highestPrediction.probability
+            ) {
+
+                highestPrediction =
+                    predictions[i];
+            }
+        }
+
+
+        const className =
+            highestPrediction.className;
+
+        const confidence =
+            (
+                highestPrediction.probability *
+                100
+            ).toFixed(1);
+
+
+        // Display result
+        if (
+            className
+                .toUpperCase()
+                .includes("CONTAMINATED")
+        ) {
+
+            statusText.innerHTML =
+                "🔴 <strong>CONTAMINATED</strong><br>" +
+                "AI Confidence: " +
+                confidence +
+                "%";
+
+        } else {
+
+            statusText.innerHTML =
+                "🟢 <strong>CLEAN</strong><br>" +
+                "AI Confidence: " +
+                confidence +
+                "%";
+        }
+
+        console.log(predictions);
+    }
+);
+
+
+// Start loading the model
+loadModel();
