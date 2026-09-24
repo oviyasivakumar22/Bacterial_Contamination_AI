@@ -6,193 +6,124 @@ let cameraStream = null;
 
 const video = document.getElementById("camera");
 const canvas = document.getElementById("canvas");
+const startButton = document.getElementById("startCamera");
+const captureButton = document.getElementById("captureImage");
+const statusText = document.getElementById("status");
 
-const startButton =
-    document.getElementById("startCamera");
-
-const captureButton =
-    document.getElementById("captureImage");
-
-const statusText =
-    document.getElementById("status");
-
-
-// Load the Teachable Machine model
+// Load Teachable Machine model
 async function loadModel() {
+    try {
+        statusText.textContent = "Loading AI model...";
+
+        const modelURL = MODEL_URL + "model.json";
+        const metadataURL = MODEL_URL + "metadata.json";
+
+        model = await tmImage.load(modelURL, metadataURL);
+
+        statusText.textContent = "AI model ready. Start the camera.";
+
+        console.log("AI model loaded successfully.");
+
+    } catch (error) {
+        console.error(error);
+        statusText.textContent = "Failed to load AI model.";
+    }
+}
+
+// Start camera
+startButton.addEventListener("click", async () => {
 
     try {
 
-        statusText.textContent =
-            "Loading AI model...";
+        cameraStream = await navigator.mediaDevices.getUserMedia({
+            video: {
+                facingMode: { ideal: "environment" }
+            },
+            audio: false
+        });
 
-        const modelURL =
-            MODEL_URL + "model.json";
-
-        const metadataURL =
-            MODEL_URL + "metadata.json";
-
-        model = await tmImage.load(
-            modelURL,
-            metadataURL
-        );
+        video.srcObject = cameraStream;
 
         statusText.textContent =
-            "AI model ready. Start the camera.";
-
-        console.log(
-            "AI model loaded successfully."
-        );
+            "Back camera active. Point it at the equipment.";
 
     } catch (error) {
 
         console.error(error);
 
         statusText.textContent =
-            "Failed to load AI model.";
+            "Camera access failed. Please allow camera permission.";
     }
-}
+});
 
+// Capture image and analyze
+captureButton.addEventListener("click", async () => {
 
-// Start the rear camera
-startButton.addEventListener(
-    "click",
-    async () => {
-
-        try {
-
-            cameraStream =
-                await navigator.mediaDevices
-                    .getUserMedia({
-
-                        video: {
-                            facingMode: {
-                                ideal: "environment"
-                            }
-                        },
-
-                        audio: false
-                    });
-
-            video.srcObject =
-                cameraStream;
-
-            statusText.textContent =
-                "Back camera active. Point it at the equipment.";
-
-        } catch (error) {
-
-            console.error(error);
-
-            statusText.textContent =
-                "Camera access failed. Please allow camera permission.";
-        }
+    if (!cameraStream) {
+        statusText.textContent = "Start the camera first.";
+        return;
     }
-);
 
+    if (!model) {
+        statusText.textContent = "AI model is still loading.";
+        return;
+    }
 
-// Capture image and analyze it
-captureButton.addEventListener(
-    "click",
-    async () => {
+    // Capture current camera frame
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
 
-        if (!cameraStream) {
+    const context = canvas.getContext("2d");
 
-            statusText.textContent =
-                "Start the camera first.";
+    context.drawImage(
+        video,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
 
-            return;
-        }
+    // AI prediction
+    const predictions = await model.predict(canvas);
 
-        if (!model) {
+    // Find highest prediction
+    let highestPrediction = predictions[0];
 
-            statusText.textContent =
-                "AI model is still loading.";
+    for (let i = 1; i < predictions.length; i++) {
 
-            return;
-        }
-
-
-        // Capture current camera frame
-        canvas.width =
-            video.videoWidth;
-
-        canvas.height =
-            video.videoHeight;
-
-        const context =
-            canvas.getContext("2d");
-
-        context.drawImage(
-            video,
-            0,
-            0,
-            canvas.width,
-            canvas.height
-        );
-
-
-        // Ask the AI model for prediction
-        const predictions =
-            await model.predict(canvas);
-
-
-        // Find the class with highest confidence
-        let highestPrediction =
-            predictions[0];
-
-        for (
-            let i = 1;
-            i < predictions.length;
-            i++
-        ) {
-
-            if (
-                predictions[i].probability >
-                highestPrediction.probability
-            ) {
-
-                highestPrediction =
-                    predictions[i];
-            }
-        }
-
-
-        const className =
-            highestPrediction.className;
-
-        const confidence =
-            (
-                highestPrediction.probability *
-                100
-            ).toFixed(1);
-
-
-        // Display result
         if (
-            className
-                .toUpperCase()
-                .includes("CONTAMINATED")
+            predictions[i].probability >
+            highestPrediction.probability
         ) {
-
-            statusText.innerHTML =
-                "🔴 <strong>CONTAMINATED</strong><br>" +
-                "AI Confidence: " +
-                confidence +
-                "%";
-
-        } else {
-
-            statusText.innerHTML =
-                "🟢 <strong>CLEAN</strong><br>" +
-                "AI Confidence: " +
-                confidence +
-                "%";
+            highestPrediction = predictions[i];
         }
-
-        console.log(predictions);
     }
-);
 
+    const className = highestPrediction.className;
 
-// Start loading the model
+    const confidence =
+        (highestPrediction.probability * 100).toFixed(1);
+
+    // Display result
+    if (className.toUpperCase().includes("CONTAMINATED")) {
+
+        statusText.innerHTML =
+            "🔴 <strong>CONTAMINATED</strong><br>" +
+            "AI Confidence: " +
+            confidence +
+            "%";
+
+    } else {
+
+        statusText.innerHTML =
+            "🟢 <strong>CLEAN</strong><br>" +
+            "AI Confidence: " +
+            confidence +
+            "%";
+    }
+
+    console.log(predictions);
+});
+
+// Load AI model when website opens
 loadModel();
