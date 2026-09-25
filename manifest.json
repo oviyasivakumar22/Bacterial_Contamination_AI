@@ -1,0 +1,10 @@
+{
+  "name": "AI Surface Contamination Screening",
+  "short_name": "Contamination AI",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#eef3f7",
+  "theme_color": "#0d47a1",
+  "orientation": "portrait",
+  "description": "AI-assisted surface contamination screening for medical equipment."
+}
