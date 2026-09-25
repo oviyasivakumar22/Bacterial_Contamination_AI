@@ -5,31 +5,57 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f2f6f8;
-    color: #222;
+    background: #eef3f7;
+    color: #1f2933;
 }
 
-.container {
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 25px;
+.app {
+    max-width: 850px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Header */
+
+header {
     text-align: center;
-    background: white;
+    background: #0d47a1;
+    color: white;
+    padding: 25px 15px;
     border-radius: 15px;
+    margin-bottom: 20px;
 }
 
-h1 {
-    margin-bottom: 10px;
+header h1 {
+    margin: 0 0 8px;
+    font-size: 28px;
 }
 
-.subtitle {
-    color: #666;
-    margin-bottom: 25px;
+header p {
+    margin: 0;
+    font-size: 16px;
 }
+
+/* Cards */
+
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card h2 {
+    margin-top: 0;
+    text-align: center;
+}
+
+/* Camera */
 
 .camera-box {
     width: 100%;
-    max-width: 600px;
+    max-width: 650px;
     margin: auto;
     background: #111;
     border-radius: 12px;
@@ -41,26 +67,34 @@ h1 {
     display: block;
 }
 
+/* Buttons */
+
 .buttons {
-    margin: 20px 0;
+    text-align: center;
+    margin-top: 20px;
 }
 
 button {
-    padding: 12px 20px;
+    padding: 13px 20px;
     margin: 5px;
     border: none;
     border-radius: 8px;
-    cursor: pointer;
     font-size: 16px;
+    cursor: pointer;
 }
 
-#startCamera {
+.primary {
     background: #1976d2;
     color: white;
 }
 
-#captureImage {
+.success {
     background: #2e7d32;
+    color: white;
+}
+
+.secondary {
+    background: #757575;
     color: white;
 }
 
@@ -68,22 +102,64 @@ button:hover {
     opacity: 0.85;
 }
 
+/* Result */
+
+.result-card {
+    text-align: center;
+}
+
+#resultIcon {
+    font-size: 45px;
+    margin: 10px;
+}
+
+#status {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Treatment */
+
+.treatment-card {
+    text-align: center;
+    background: #f5f8fa;
+}
+
+#treatmentText {
+    font-size: 17px;
+    line-height: 1.5;
+}
+
+/* Hidden canvas */
+
 #canvas {
     display: none;
 }
 
-.result-box {
-    margin-top: 20px;
-    padding: 15px;
-    background: #eef3f5;
-    border-radius: 10px;
+/* Footer */
+
+footer {
+    text-align: center;
+    color: #667085;
+    font-size: 13px;
+    padding: 10px;
 }
 
-.result-box h2 {
-    margin-top: 0;
-}
+/* Mobile */
 
-#status {
-    font-size: 18px;
-    font-weight: bold;
+@media (max-width: 600px) {
+
+    .app {
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 22px;
+    }
+
+    button {
+        width: 90%;
+        margin: 6px auto;
+    }
+
 }
