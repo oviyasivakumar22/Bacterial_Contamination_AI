@@ -5,57 +5,31 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #eef3f7;
-    color: #1f2933;
+    background: #f2f6f8;
+    color: #222;
 }
 
-.app {
-    max-width: 850px;
-    margin: auto;
-    padding: 20px;
-}
-
-/* Header */
-
-header {
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 25px;
     text-align: center;
-    background: #0d47a1;
-    color: white;
-    padding: 25px 15px;
-    border-radius: 15px;
-    margin-bottom: 20px;
-}
-
-header h1 {
-    margin: 0 0 8px;
-    font-size: 28px;
-}
-
-header p {
-    margin: 0;
-    font-size: 16px;
-}
-
-/* Cards */
-
-.card {
     background: white;
-    padding: 20px;
-    margin-bottom: 20px;
     border-radius: 15px;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
 }
 
-.card h2 {
-    margin-top: 0;
-    text-align: center;
+h1 {
+    margin-bottom: 10px;
 }
 
-/* Camera */
+.subtitle {
+    color: #666;
+    margin-bottom: 25px;
+}
 
 .camera-box {
     width: 100%;
-    max-width: 650px;
+    max-width: 600px;
     margin: auto;
     background: #111;
     border-radius: 12px;
@@ -67,34 +41,26 @@ header p {
     display: block;
 }
 
-/* Buttons */
-
 .buttons {
-    text-align: center;
-    margin-top: 20px;
+    margin: 20px 0;
 }
 
 button {
-    padding: 13px 20px;
+    padding: 12px 20px;
     margin: 5px;
     border: none;
     border-radius: 8px;
-    font-size: 16px;
     cursor: pointer;
+    font-size: 16px;
 }
 
-.primary {
+#startCamera {
     background: #1976d2;
     color: white;
 }
 
-.success {
+#captureImage {
     background: #2e7d32;
-    color: white;
-}
-
-.secondary {
-    background: #757575;
     color: white;
 }
 
@@ -102,64 +68,223 @@ button:hover {
     opacity: 0.85;
 }
 
-/* Result */
-
-.result-card {
-    text-align: center;
+#canvas {
+    display: none;
 }
 
-#resultIcon {
-    font-size: 45px;
-    margin: 10px;
+.result-box {
+    margin-top: 20px;
+    padding: 15px;
+    background: #eef3f5;
+    border-radius: 10px;
+}
+
+.result-box h2 {
+    margin-top: 0;
+}
+
+#status {
+    font-size: 18px;
+    font-weight: bold;
+}/* Bottom App Navigation */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    height: 70px;
+
+    background: white;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    border-top: 1px solid #ddd;
+
+    box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.08);
+
+    z-index: 1000;
+}
+
+.nav-item {
+    background: none;
+    border: none;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 4px;
+
+    font-size: 20px;
+
+    color: #777;
+
+    cursor: pointer;
+
+    padding: 6px 18px;
+}
+
+.nav-item span {
+    font-size: 12px;
+}
+
+.nav-item.active {
+    color: #0d47a1;
+    font-weight: bold;
+}
+
+.nav-item:hover {
+    opacity: 0.8;
+}
+
+/* Prevent navigation bar from covering content */
+
+body {
+    padding-bottom: 80px;
+}
+/* Home Screen */
+
+.home-card {
+    background: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.home-card h2 {
+    margin-bottom: 10px;
+    color: #0d47a1;
+}
+
+.home-card p {
+    color: #666;
+    line-height: 1.5;
+}
+
+.home-screen-button {
+    margin-top: 15px;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 10px;
+    background: #0d47a1;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.home-screen-button:hover {
+    opacity: 0.9;
+}
+/* Upload Photo */
+
+.upload-section {
+    margin-top: 20px;
+    padding: 18px;
+    background: #f5f8fa;
+    border-radius: 12px;
+}
+
+.upload-section p {
+    margin-top: 0;
+    color: #555;
+}
+
+#imageUpload {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.upload-button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #455a64;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.upload-button:hover {
+    opacity: 0.9;
+}
+/* Professional Result Card */
+
+.result-card {
+    margin-top: 20px;
+    padding: 22px;
+    background: white;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.result-card h2 {
+    margin-top: 0;
+    color: #263238;
+}
+
+.result-icon {
+    font-size: 42px;
+    margin: 12px 0;
 }
 
 #status {
     font-size: 20px;
     font-weight: bold;
-}
-
-/* Treatment */
-
-.treatment-card {
-    text-align: center;
-    background: #f5f8fa;
-}
-
-#treatmentText {
-    font-size: 17px;
     line-height: 1.5;
 }
 
-/* Hidden canvas */
+.recommendation {
+    margin-top: 15px;
+    padding: 12px;
+    background: #f5f7f8;
+    border-radius: 10px;
+    color: #555;
+    line-height: 1.5;
+}
+/* Screening History */
 
-#canvas {
-    display: none;
+.history-card {
+    background: white;
+    padding: 22px;
+    margin-top: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
-/* Footer */
+.history-card h2 {
+    margin-top: 0;
+    color: #263238;
+}
 
-footer {
+.history-item {
+    padding: 15px;
+    margin-top: 12px;
+    background: #f5f7f8;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.history-item strong {
+    font-size: 16px;
+}
+
+.history-item small {
+    display: block;
+    margin-top: 5px;
+    color: #777;
+}
+
+.empty-history {
+    color: #777;
     text-align: center;
-    color: #667085;
-    font-size: 13px;
-    padding: 10px;
-}
-
-/* Mobile */
-
-@media (max-width: 600px) {
-
-    .app {
-        padding: 10px;
-    }
-
-    header h1 {
-        font-size: 22px;
-    }
-
-    button {
-        width: 90%;
-        margin: 6px auto;
-    }
-
+    padding: 15px;
 }

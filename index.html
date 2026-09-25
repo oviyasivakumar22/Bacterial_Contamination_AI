@@ -31,7 +31,31 @@
 
         <main>
 
-            <section class="screening-card">
+            <section class="home-card">
+
+    <h2>Welcome</h2>
+
+    <p>
+        AI-assisted screening for medical equipment surfaces.
+    </p>
+
+    <button id="startScreeningHome" class="home-screen-button">
+        🔍 Start Screening
+    </button>
+
+</section>
+<section class="history-card" id="historySection">
+
+    <h2>Screening History</h2>
+
+    <div id="historyList">
+        <p class="empty-history">
+            No screening records yet.
+        </p>
+    </div>
+
+</section>
+<section class="screening-card">
 
                 <h2>Surface Screening</h2>
 
@@ -60,6 +84,21 @@
                     </button>
 
                 </div>
+                <div class="upload-section">
+
+    <p>Or upload an equipment surface photo</p>
+
+    <input
+        type="file"
+        id="imageUpload"
+        accept="image/*"
+    >
+
+    <button id="uploadScreenButton" class="upload-button">
+        🖼️ Upload & Screen
+    </button>
+
+</div>
 
 
                 <canvas id="canvas"></canvas>
@@ -67,14 +106,21 @@
 
                 <div class="result-card">
 
-                    <h2>Screening Result</h2>
+    <h2>Screening Result</h2>
 
-                    <p id="status">
-                        Camera not started
-                    </p>
+    <div id="resultIcon" class="result-icon">
+        🔍
+    </div>
 
-                </div>
+    <p id="status">
+        Camera not started
+    </p>
 
+    <p id="recommendation" class="recommendation">
+        Start a screening to view the result.
+    </p>
+
+</div>
 
                 <div class="guidance">
 
@@ -103,11 +149,35 @@
             </p>
 
         </footer>
+        <nav class="bottom-nav">
+
+    <button class="nav-item active" id="homeNav">
+        🏠
+        <span>Home</span>
+    </button>
+
+    <button class="nav-item" id="screenNav">
+        🔍
+        <span>Screen</span>
+    </button>
+
+    <button class="nav-item" id="historyNav">
+        📋
+        <span>History</span>
+    </button>
+
+    <button class="nav-item" id="settingsNav">
+        ⚙️
+        <span>Settings</span>
+    </button>
+
+</nav>
 
     </div>
 
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
+<script src="app.js"></script>
+    
 
 </body>
 </html>

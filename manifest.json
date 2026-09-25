@@ -1,10 +1,22 @@
 {
   "name": "AI Surface Contamination Screening",
-  "short_name": "Contamination AI",
+  "short_name": "AI Contamination Screener",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#eef3f7",
   "theme_color": "#0d47a1",
   "orientation": "portrait",
-  "description": "AI-assisted surface contamination screening for medical equipment."
+  "description": "AI-assisted surface contamination screening for medical equipment.",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }

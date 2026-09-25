@@ -1,1 +1,0 @@
-# Bacterial_Contamination_AI
