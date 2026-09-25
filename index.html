@@ -12,54 +12,85 @@
 
 <body>
 
-    <div class="container">
+    <div class="app">
 
-        <h1>AI Surface Contamination Screening</h1>
+        <header>
+            <h1>AI Surface Contamination Screening</h1>
+            <p>Medical Equipment Surface Analysis</p>
+        </header>
 
-        <p class="subtitle">
-            Capture a medical equipment surface using the camera
-        </p>
+        <main>
 
-        <div class="camera-box">
-            <video id="camera" autoplay playsinline></video>
-        </div>
+            <!-- Camera Section -->
+            <section class="card">
 
-        <div class="buttons">
+                <h2>Surface Screening</h2>
 
-            <button id="startCamera">
-                Start Back Camera
-            </button>
+                <div class="camera-box">
+                    <video id="camera" autoplay playsinline></video>
+                </div>
 
-            <button id="captureImage">
-                Capture Image
-            </button>
+                <div class="buttons">
 
-        </div>
+                    <button id="startCamera" class="primary">
+                        Start Camera
+                    </button>
 
-        <canvas id="canvas"></canvas>
+                    <button id="captureImage" class="success">
+                        Capture & Screen
+                    </button>
 
-        <div class="result-box">
+                    <button id="retake" class="secondary">
+                        Retake
+                    </button>
 
-            <h2>Screening Result</h2>
+                </div>
 
-            <p id="status">
-                Loading AI model...
-            </p>
+                <canvas id="canvas"></canvas>
 
-        </div>
+            </section>
+
+
+            <!-- Result Section -->
+            <section class="card result-card">
+
+                <h2>Screening Result</h2>
+
+                <div id="resultIcon">🔍</div>
+
+                <p id="status">
+                    AI model is loading...
+                </p>
+
+            </section>
+
+
+            <!-- Treatment Recommendation -->
+            <section id="treatmentBox" class="card treatment-card">
+
+                <h2>Recommended Action</h2>
+
+                <p id="treatmentText">
+                    Screening required before treatment recommendation.
+                </p>
+
+            </section>
+
+        </main>
+
+        <footer>
+            <p>AI-assisted surface contamination screening prototype</p>
+        </footer>
 
     </div>
 
-    <!-- TensorFlow.js -->
+
+    <!-- AI Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 
-    <!-- Teachable Machine -->
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 
-    <!-- Our JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 
