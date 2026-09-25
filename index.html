@@ -1,99 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>AI Surface Contamination Screening</title>
+
     <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0d47a1">
+    <meta name="theme-color" content="#0d47a1">
 
     <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 </head>
 
 <body>
 
     <div class="app">
 
-        <header>
-            <h1>AI Surface Contamination Screening</h1>
-            <p>Medical Equipment Surface Analysis</p>
+        <header class="app-header">
+            <div class="logo">🧪</div>
+
+            <div>
+                <h1>Surface Contamination Screening</h1>
+                <p>AI-assisted medical equipment screening</p>
+            </div>
         </header>
+
 
         <main>
 
-            <!-- Camera Section -->
-            <section class="card">
+            <section class="screening-card">
 
                 <h2>Surface Screening</h2>
 
-                <div class="camera-box">
+                <p class="instruction">
+                    Position the medical equipment surface inside the camera frame.
+                </p>
+
+
+                <div class="camera-container">
+
                     <video id="camera" autoplay playsinline></video>
+
+                    <div class="camera-frame"></div>
+
                 </div>
+
 
                 <div class="buttons">
 
-                    <button id="startCamera" class="primary">
-                        Start Camera
+                    <button id="startCamera" class="primary-button">
+                        📷 Start Camera
                     </button>
 
-                    <button id="captureImage" class="success">
-                        Capture & Screen
-                    </button>
-
-                    <button id="retake" class="secondary">
-                        Retake
+                    <button id="captureImage" class="secondary-button">
+                        🔍 Capture & Screen
                     </button>
 
                 </div>
 
+
                 <canvas id="canvas"></canvas>
 
-            </section>
+
+                <div class="result-card">
+
+                    <h2>Screening Result</h2>
+
+                    <p id="status">
+                        Camera not started
+                    </p>
+
+                </div>
 
 
-            <!-- Result Section -->
-            <section class="card result-card">
+                <div class="guidance">
 
-                <h2>Screening Result</h2>
+                    <h3>Screening Guidance</h3>
 
-                <div id="resultIcon">🔍</div>
+                    <p>
+                        Ensure the equipment surface is clearly visible and
+                        adequately illuminated before screening.
+                    </p>
 
-                <p id="status">
-                    AI model is loading...
-                </p>
-
-            </section>
-
-
-            <!-- Treatment Recommendation -->
-            <section id="treatmentBox" class="card treatment-card">
-
-                <h2>Recommended Action</h2>
-
-                <p id="treatmentText">
-                    Screening required before treatment recommendation.
-                </p>
+                </div>
 
             </section>
 
         </main>
 
+
         <footer>
-            <p>AI-assisted surface contamination screening prototype</p>
+
+            <p>
+                AI Surface Contamination Screening
+            </p>
+
+            <p class="disclaimer">
+                Prototype for research and academic demonstration.
+            </p>
+
         </footer>
 
     </div>
 
 
-    <!-- AI Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
-
     <script src="script.js"></script>
 
 </body>
-
 </html>
