@@ -392,3 +392,35 @@ if ("serviceWorker" in navigator) {
             });
     });
 }
+const homeImageUpload =
+    document.getElementById("homeImageUpload");
+
+const homeUploadButton =
+    document.getElementById("homeUploadButton");
+
+homeUploadButton.addEventListener("click", () => {
+    homeImageUpload.click();
+});
+
+homeImageUpload.addEventListener("change", () => {
+    if (homeImageUpload.files.length > 0) {
+
+        const file = homeImageUpload.files[0];
+
+        // Put the selected image into the existing upload input
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(file);
+        imageUpload.files = dataTransfer.files;
+
+        // Move user to Screening section
+        if (screeningCard) {
+            screeningCard.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+
+        statusText.textContent =
+            "Image selected. Tap Upload Image to start screening.";
+    }
+});
